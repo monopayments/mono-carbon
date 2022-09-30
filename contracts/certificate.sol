@@ -33,11 +33,17 @@ contract Certificate is ERC1155, ERC1155Burnable{
         owner = msg.sender;
     }
 
-    function setURI(string memory newuri) public onlyOwner {
+    function setURI(string memory newuri) 
+        public 
+        onlyOwner 
+    {
         _setURI(newuri);
     }
 
-    function mintCertificate(uint256 carbon) public whiteListed{
+    function mintCertificate(uint256 carbon) 
+        public 
+        whiteListed
+    {
         uint256 newItemId = _tokenIds.current();
         
         _mint(msg.sender, newItemId, 1, '');
@@ -47,8 +53,21 @@ contract Certificate is ERC1155, ERC1155Burnable{
         _tokenIds.increment();
     }
 
-    function retireCertificate(uint _id) public{
+    function retireCertificate(uint _id) 
+        public
+    {
+        require(tokenToOwner[_id] == msg.sender, "Only provider can retire.");
+
         retiredStatus[_id] = true;
+    }
+
+    function batchRetire(uint256[] memory _ids) 
+        public
+    {
+        for(uint256 i=0; i<_ids.length; i++){
+            require(tokenToOwner[i] == msg.sender, "Only provider can retire.");
+            retiredStatus[i] = true;
+        }
     }
 
     function addAddressWl(address _address)
