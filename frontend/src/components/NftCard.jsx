@@ -50,7 +50,10 @@ const NftCard = ({ id }) => {
             <span className="mr-auto">Price: </span>
             <div className="flex items-center justify-center">
               <span className="text-lg mr-3"> {nftData.price}</span>
-              <SvgIcon icon="CARBON" className="w-5 h-5" />
+              <div className="flex items-center justify-center bg-white rounded-full w-8 h-8">
+                <SvgIcon icon="CARBON" className="w-6 h-6 mt-2" />
+              </div>
+                
             </div>
           </div>
         </div>
