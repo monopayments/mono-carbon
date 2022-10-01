@@ -8,7 +8,7 @@ const Header = () => {
   const location = useLocation();
   return (
     <header className={isNavExpanded ? 'menu-open' : ''}>
-      <nav className="border-gray-200 px-2 sm:px-4 py-2.5 primary-menu">
+      <nav className="border-gray-200 px-2 sm:px-4 py-2.5 primary-menu left-0 rigt-0 z-20 fixed w-full bg-white border-b">
         <div className="container flex flex-wrap justify-between items-center mx-auto">
           <Link
             to="/"
