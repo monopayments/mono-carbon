@@ -20,14 +20,14 @@ const approveAbi = [
     "function setApprovalForAll(address operator, bool approved)"
 ]
 
-export const approval = async (address) => {
+export const approval = async (_address) => {
     const signer = provider.getSigner();
+    const contract = new ethers.Contract(address, approveAbi, signer);   
 
-	const contract = new ethers.Contract(address, approveAbi, signer);   
-
-    const tx = await contract.setApprovalForAll(address, true, {gasPrice: 10000000, gasLimit: 1000000});
-
-	const receipt = await tx.wait();
+    const tx = await contract.setApprovalForAll(_address, false);
+    console.log(_address)
+    console.log(tx)
+    const receipt = await tx.wait();
 	console.log("receipt", receipt);
 
 }

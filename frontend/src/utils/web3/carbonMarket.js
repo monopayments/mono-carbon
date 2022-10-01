@@ -7,12 +7,11 @@ const fracAbi = [
     "function fractionizeNft(uint256 nftId, uint256 amount)"
 ];
 
-export const fractionizeNft = async (id) => {
+export const fractionizeNft = async (_id) => {
     await approval(address)
     const signer = provider.getSigner();
 	const contract = new ethers.Contract(address, fracAbi, signer);   
-
-	const tx = await contract.functions.fractionizeNft(BigNumber.from(id),BigNumber.from(1));
+	const tx = await contract.fractionizeNft(BigNumber.from(_id),BigNumber.from(1));
 
 	const receipt = await tx.wait();
 	console.log("receipt", receipt);
