@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import SvgIcon from '../components/SvgIcon';
-import ErrorMessage from './ErrorMessage';
 
 const NftCard = ({ id }) => {
   const [nftData, setNftData] = useState({});
@@ -19,7 +18,7 @@ const NftCard = ({ id }) => {
 
   useEffect(() => {
     fetchNftData(id);
-  }, [id]);
+  });
 
   return (
     <div className="flex w-full items-center justify-center">

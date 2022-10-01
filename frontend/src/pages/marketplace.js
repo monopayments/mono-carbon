@@ -1,36 +1,58 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import NftCard from '../components/NftCard';
+import { getNftList } from '../utils/web3/carbonMarket';
 
 function Marketplace() {
   const [query] = useSearchParams();
   const [selectedProvider, setSelectedProvider] = useState(query.get('provider') || '');
+  const [nftIDs, setNftIDs] = useState();
 
   const listedNfts = [
     {
-      id: 1,
-      provider: 'xyz',
+      id: 200,
+      provider: 'bis',
     },
     {
-      id: 2,
-      provider: 'abc',
+      id: 201,
+      provider: 'gns',
     },
     {
-      id: 3,
-      provider: 'abc',
+      id: 202,
+      provider: 'gns',
     },
   ];
 
   const providers = [
     {
-      id: 'abc',
-      name: 'ABC',
+      id: 'bis',
+      name: 'Bisiklet Kira Şirketi',
     },
     {
-      id: 'xyz',
-      name: 'XYZ',
+      id: 'gns',
+      name: 'Güneş Paneli Şirketi',
     },
+    {
+      id: 'akb',
+      name: 'Akbank'
+    }
   ];
+
+  useEffect(() => {
+    const asyncGet =  async () =>{
+      let nfts = await getNftList()
+      nfts = nfts.map((nftID) => {
+        return(
+          {
+            id: Number(nftID),
+            provider: 'akb',
+          }
+        )
+      })
+      setNftIDs(nfts.concat(listedNfts));
+    }
+    asyncGet();
+  }, [])
 
   return (
     <section className="w-full min-h-screen relative flex flex-col justify-center items-center">
@@ -75,7 +97,7 @@ function Marketplace() {
           </div>
           <div className="w-full md:w-9/12">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
-              {listedNfts
+              {nftIDs
                 .filter((nft) => {
                   return selectedProvider === '' ? 'all' : nft.provider === selectedProvider;
                 })

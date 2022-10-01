@@ -16,3 +16,17 @@ export const fractionizeNft = async (_id) => {
 	const receipt = await tx.wait();
 	console.log("receipt", receipt);
 }
+
+const getNFTAbi = [
+    "function getNftList() view returns (uint256[])"
+  ];
+  
+export const getNftList = async() => {
+    const signer = provider.getSigner();
+
+    const contract = new ethers.Contract(address, getNFTAbi, signer);   
+    const result = await contract.getNftList();
+
+    console.log("result", result);
+    return result;
+}

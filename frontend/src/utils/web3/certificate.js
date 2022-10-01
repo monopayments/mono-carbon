@@ -29,5 +29,4 @@ export const approval = async (_address) => {
     console.log(tx)
     const receipt = await tx.wait();
 	console.log("receipt", receipt);
-
 }
