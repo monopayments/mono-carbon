@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import SvgIcon from '../components/SvgIcon';
-import {cryptoDevTokenToEth,increaseAllowance} from "../utils/web3/swap";
+import {cryptoDevTokenToEth,increaseAllowance,getAmountOfTokens} from "../utils/web3/swap";
 const tokens = {
   CARBON: {
     symbol: 'CARBON',
@@ -17,6 +17,9 @@ const Swap = () => {
   const [direction, setDirection] = useState(0);
   const [swap, setSwap] = useState([fromToken, toToken]);
   const [amount, setAmount] = useState(0);
+  const [amountOfTokens, setmountOfTokens] = useState(0);
+
+  
 
   useEffect(() => {
     if (direction === 1) {
@@ -24,7 +27,19 @@ const Swap = () => {
     } else {
       setSwap([fromToken, toToken]);
     }
-  }, [direction, toToken, fromToken]);
+
+    getAmountOfToken(amount);
+    
+  }, [direction, toToken, fromToken,amount]);
+
+  async  function getAmountOfToken  (){
+    
+    if(amount !=0){
+
+      let temptoken = await getAmountOfTokens(amount);
+      setmountOfTokens(temptoken);
+    }
+    }
 
   
   async  function swapCall  (){
@@ -32,11 +47,9 @@ const Swap = () => {
   console.log(swap,"swapCall geldi");
   if(swap[0].symbol === "CARBON"){
     console.log("carbon", amount);
-    
     //await increaseAllowance(amount);
     await cryptoDevTokenToEth(amount,1);
-
-    
+   
   }
   else{
     console.log("avax geldi", amount);
@@ -82,7 +95,7 @@ const Swap = () => {
         <input
           type="text"
           className="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="0.0"
+          placeholder={amountOfTokens}
           required
         />
       </div>
