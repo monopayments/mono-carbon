@@ -17,7 +17,7 @@ const Header = () => {
               setIsNavExpanded(false);
             }}
           >
-            <img src="/logo.svg" alt="MonoCarbon" width="20" height="60" className="mr-4" />
+            <img src="/logo.svg" alt="MonoCarbon" width="30" height="60" className="mr-4" />
             <span className="self-center text-xl font-bold whitespace-nowrap">
               MonoCarbon
             </span>
