@@ -44,7 +44,7 @@ contract  CarbonMarket is ERC1155Holder {
    
     function fractionizeNft(uint256 nftId,uint256 amount) external {
       require(nftId >= 0, "Token doesnot exist");
-      certificate.safeTransferFrom(msg.sender, address(this), nftId, amount, "");
+      certificate.safeTransferFrom(msg.sender, address(this), nftId, 1, "");
       token.mint(msg.sender, certificate.tokenToValue(nftId));
       nftList.push(nftId);
     }
