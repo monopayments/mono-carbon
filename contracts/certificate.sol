@@ -35,7 +35,7 @@ contract Certificate is ERC1155, ERC1155Burnable{
         owner = msg.sender;
     }
 
-    function setCarbonMarket(address _carbonMarket){
+    function setCarbonMarket(address _carbonMarket) public onlyOwner{
         carbonMarket = _carbonMarket;
     }
 
