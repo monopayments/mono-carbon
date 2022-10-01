@@ -6,7 +6,7 @@ import { getNftList } from '../utils/web3/carbonMarket';
 function Marketplace() {
   const [query] = useSearchParams();
   const [selectedProvider, setSelectedProvider] = useState(query.get('provider') || '');
-  const [nftIDs, setNftIDs] = useState();
+  const [nftIDs, setNftIDs] = useState([]);
 
   const listedNfts = [
     {
