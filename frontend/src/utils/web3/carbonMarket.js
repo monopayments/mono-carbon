@@ -1,4 +1,4 @@
-import { ethers, BigNumber } from "ethers";
+import { ethers } from "ethers";
 import { approval } from "./certificate";
 
 const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -11,7 +11,7 @@ export const fractionizeNft = async (_id) => {
     await approval(address)
     const signer = provider.getSigner();
 	const contract = new ethers.Contract(address, fracAbi, signer);   
-	const tx = await contract.fractionizeNft(BigNumber.from(_id),BigNumber.from(1));
+	const tx = await contract.fractionizeNft(4,1);
 
 	const receipt = await tx.wait();
 	console.log("receipt", receipt);

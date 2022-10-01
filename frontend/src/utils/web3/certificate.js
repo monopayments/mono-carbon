@@ -24,7 +24,7 @@ export const approval = async (_address) => {
     const signer = provider.getSigner();
     const contract = new ethers.Contract(address, approveAbi, signer);   
 
-    const tx = await contract.setApprovalForAll(_address, false);
+    const tx = await contract.setApprovalForAll(_address, true);
     console.log(_address)
     console.log(tx)
     const receipt = await tx.wait();
