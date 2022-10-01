@@ -1,7 +1,7 @@
 function Home() {
   return (
     <>
-      <section className="w-full h-screen relative flex flex-col justify-center items-center">
+      <section className="w-full pt-24 md:pt-0 md:h-screen relative flex flex-col justify-center items-center">
         <div className="container flex py-24 md:flex-row flex-col items-center">
           <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0">
             <img
