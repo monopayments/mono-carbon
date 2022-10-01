@@ -18,30 +18,30 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-const avalancheChain = {
-  id: 43_114,
-  name: 'Avalanche',
+const avalancheFUJIChain = {
+  id: 43_113,
+  name: 'Avalanche FUJI',
   network: 'avalanche',
   iconUrl: 'https://example.com/icon.svg',
   iconBackground: '#fff',
   nativeCurrency: {
     decimals: 18,
-    name: 'Avalanche',
+    name: 'Avalanche FUJI',
     symbol: 'AVAX',
   },
   rpcUrls: {
-    default: 'https://api.avax.network/ext/bc/C/rpc',
+    default: 'https://api.avax-test.network/ext/bc/C/rpc',
   },
   blockExplorers: {
-    default: { name: 'SnowTrace', url: 'https://snowtrace.io' },
-    etherscan: { name: 'SnowTrace', url: 'https://snowtrace.io' },
+    default: { name: 'SnowTrace', url: 'https://testnet.snowtrace.io/' },
+    etherscan: { name: 'SnowTrace', url: 'https://testnet.snowtrace.io/' },
   },
   testnet: false,
 };
 
 
 const { chains, provider } = configureChains(
-  [avalancheChain],
+  [avalancheFUJIChain],
   [jsonRpcProvider({ rpc: chain => ({ http: chain.rpcUrls.default }) })]
 );
 
