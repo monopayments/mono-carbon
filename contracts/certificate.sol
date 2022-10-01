@@ -14,6 +14,8 @@ contract Certificate is ERC1155, ERC1155Burnable{
     mapping (uint256 => address) private tokenToOwner;
     mapping (uint256 => uint256) public tokenToValue;
     mapping (uint256 => bool) public retiredStatus;
+    mapping (uint256 => uint256) public cerfIdList;
+
 
     address public carbonMarket;
 
@@ -35,7 +37,7 @@ contract Certificate is ERC1155, ERC1155Burnable{
         owner = msg.sender;
     }
 
-    function setCarbonMarket(address _carbonMarket){
+    function setCarbonMarket(address _carbonMarket) public onlyOwner{
         carbonMarket = _carbonMarket;
     }
 
@@ -46,7 +48,7 @@ contract Certificate is ERC1155, ERC1155Burnable{
         _setURI(newuri);
     }
 
-    function mintCertificate(uint256 carbon) 
+    function mintCertificate(uint256 carbon,uint256 _cerfId) 
         public 
         whiteListed
     {
@@ -55,6 +57,7 @@ contract Certificate is ERC1155, ERC1155Burnable{
         _mint(msg.sender, newItemId, 1, '');
         tokenToOwner[newItemId] = msg.sender;
         tokenToValue[newItemId] = carbon;
+        cerfIdList[newItemId] = _cerfId;
 
         _tokenIds.increment();
     }
