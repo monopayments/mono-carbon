@@ -15,6 +15,8 @@ contract Certificate is ERC1155, ERC1155Burnable{
     mapping (uint256 => uint256) public tokenToValue;
     mapping (uint256 => bool) public retiredStatus;
 
+    address public carbonMarket;
+
     Counters.Counter public _tokenIds;
 
     event Whitelisted(address indexed account, bool isWhitelisted);
@@ -31,6 +33,10 @@ contract Certificate is ERC1155, ERC1155Burnable{
 
     constructor() ERC1155(""){
         owner = msg.sender;
+    }
+
+    function setCarbonMarket(address _carbonMarket){
+        carbonMarket = _carbonMarket;
     }
 
     function setURI(string memory newuri) 
@@ -56,7 +62,7 @@ contract Certificate is ERC1155, ERC1155Burnable{
     function retireCertificate(uint _id) 
         public
     {
-        require(tokenToOwner[_id] == msg.sender, "Only provider can retire.");
+        require(tokenToOwner[_id] == msg.sender || carbonMarket == msg.sender , "Only provider can retire.");
 
         retiredStatus[_id] = true;
     }
@@ -65,7 +71,7 @@ contract Certificate is ERC1155, ERC1155Burnable{
         public
     {
         for(uint256 i=0; i<_ids.length; i++){
-            require(tokenToOwner[i] == msg.sender, "Only provider can retire.");
+            require(tokenToOwner[i] == msg.sender || carbonMarket == msg.sender , "Only provider can retire.");
             retiredStatus[i] = true;
         }
     }
