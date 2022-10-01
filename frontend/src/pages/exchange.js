@@ -37,8 +37,8 @@ async function cryptoDevTokenAddress() {
 
 useEffect(() => {
   try {
-  totalSupply();
-  cryptoDevTokenAddress(); 
+  //totalSupply();
+  //cryptoDevTokenAddress(); 
 } catch (err) {
   console.log('error totalSupply ...', err)
 }
