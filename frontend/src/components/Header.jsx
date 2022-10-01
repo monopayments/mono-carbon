@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import { Link, useLocation } from 'react-router-dom';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 const Header = () => {
   const [isNavExpanded, setIsNavExpanded] = useState(false);
@@ -38,7 +39,7 @@ const Header = () => {
             </svg>
           </button>
           <div className="hidden w-full md:block md:w-auto" id="navbar-default">
-            <ul className="flex flex-col p-4 mt-4 rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0">
+            <ul className="flex flex-col p-4 mt-4 rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 items-center">
               <li>
                 <Link
                   to="/"
@@ -98,6 +99,9 @@ const Header = () => {
                 >
                   Provider
                 </Link>
+              </li>
+              <li>
+                <ConnectButton/>
               </li>
             </ul>
           </div>
