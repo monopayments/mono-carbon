@@ -8,11 +8,26 @@ const mintAbi = [
 
 export const mintCertificate = async (amount, certificate) => {
     const signer = provider.getSigner();
-    console.log(amount, certificate)
-	const contract = new ethers.Contract(address, mintAbi, signer);
+
+    const contract = new ethers.Contract(address, mintAbi, signer);
 	const tx = await contract.functions.mintCertificate(BigNumber.from(amount), BigNumber.from(certificate));
 
 	const receipt = await tx.wait();
 	console.log("receipt", receipt);
 }
 
+const approveAbi = [
+    "function setApprovalForAll(address operator, bool approved)"
+]
+
+export const approval = async (address) => {
+    const signer = provider.getSigner();
+
+	const contract = new ethers.Contract(address, approveAbi, signer);   
+
+    const tx = await contract.setApprovalForAll(address, true, {gasPrice: 10000000, gasLimit: 1000000});
+
+	const receipt = await tx.wait();
+	console.log("receipt", receipt);
+
+}
