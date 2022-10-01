@@ -12,7 +12,7 @@ const Footer = () => {
             <span className="ml-3 text-xl">MonoCarbon</span>
           </a>
           <p className="text-sm text-gray-500 sm:ml-6 sm:mt-0 mt-4">
-            © 2020 MonoPayments
+            © 2022 MonoPayments
           </p>
         </div>
       </div>
