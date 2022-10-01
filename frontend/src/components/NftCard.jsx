@@ -22,8 +22,8 @@ const NftCard = ({ id }) => {
   }, [id]);
 
   return (
-    <div>
-      <div className="bg-[#1c1c1c] text-gray-50 overflow-hidden rounded-md max-w-sm p-2 flex flex-col">
+    <div className="flex w-full items-center justify-center">
+      <div className="w-full bg-[#1c1c1c] text-gray-50 overflow-hidden rounded-md max-w-sm p-2 flex flex-col">
         <div className="flex items-center justify-between p-5">
           <h3 className="text-left text-xl">{nftData.name}</h3>
           <div className="pl-4">

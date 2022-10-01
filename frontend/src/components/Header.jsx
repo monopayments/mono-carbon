@@ -17,6 +17,7 @@ const Header = () => {
               setIsNavExpanded(false);
             }}
           >
+            <img src="/logo.svg" alt="MonoCarbon" width="20" height="60" className="mr-4" />
             <span className="self-center text-xl font-bold whitespace-nowrap">
               MonoCarbon
             </span>
@@ -24,7 +25,7 @@ const Header = () => {
           <button
             data-collapse-toggle="navbar-default"
             type="button"
-            className="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            className="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden focus:outline-none"
             aria-controls="navbar-default"
             aria-expanded="false"
             onClick={() => {

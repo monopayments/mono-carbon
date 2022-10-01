@@ -35,9 +35,9 @@ function Marketplace() {
   return (
     <section className="w-full min-h-screen relative flex flex-col justify-center items-center">
       <div className="container w-full flex items-center justify-center bg-red">
-        <div className="w-full flex">
-          <div className="w-3/12">
-            <aside className="w-64" aria-label="Sidebar">
+        <div className="w-full flex flex-wrap">
+          <div className="w-full sm:w-3/12">
+            <aside aria-label="Sidebar">
               <div className="px-3 py-4 overflow-y-auto rounded bg-gray-50">
                 <ul className="space-y-2">
                   <li>
@@ -73,8 +73,8 @@ function Marketplace() {
               </div>
             </aside>
           </div>
-          <div className="w-9/12">
-            <div className="grid grid-cols-3 gap-12">
+          <div className="w-full md:w-9/12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
               {listedNfts
                 .filter((nft) => {
                   return selectedProvider === '' ? 'all' : nft.provider === selectedProvider;
