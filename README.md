@@ -1,8 +1,11 @@
-# Sample Hardhat Project
+# Mono Carbon
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
+![](frontend/public/logo.svg)
 
-Try running some of the following tasks:
+**Asset Backed NFT Market  & Collateralized Carbon Credit Exchange**
+
+
+## Development
 
 ```shell
 npx hardhat help
