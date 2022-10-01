@@ -69,6 +69,36 @@ const Header = () => {
                   Exchange
                 </Link>
               </li>
+              <li>
+                <Link
+                  to="/marketplace"
+                  className={
+                    location.pathname === '/marketplace'
+                      ? 'block py-2 pr-4 pl-3 md:p-0'
+                      : 'block py-2 pr-4 pl-3 text-gray-400 md:border-0 md:p-0'
+                  }
+                  onClick={() => {
+                    setIsNavExpanded(false);
+                  }}
+                >
+                  Marketplace
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/provider"
+                  className={
+                    location.pathname === '/provider'
+                      ? 'block py-2 pr-4 pl-3 md:p-0'
+                      : 'block py-2 pr-4 pl-3 text-gray-400 md:border-0 md:p-0'
+                  }
+                  onClick={() => {
+                    setIsNavExpanded(false);
+                  }}
+                >
+                  Provider
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
