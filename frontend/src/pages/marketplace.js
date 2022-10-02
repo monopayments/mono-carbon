@@ -30,7 +30,7 @@ function Marketplace() {
   const providers = [
     {
       id: 'bis',
-      name: 'Bisiklet Kira Şirketi',
+      name: 'Bisiklet Kiralama Şirketi',
     },
     {
       id: 'gns',
@@ -62,12 +62,12 @@ function Marketplace() {
   }, [])
 
   return (
-    <section className="w-full pt-24 md:pt-0 md:min-h-screen relative flex flex-col justify-center items-center">
-      <div className="container w-full flex items-center justify-center bg-red">
+    <section className="w-full pt-24 md:pt-32 md:min-h-screen relative flex flex-col ">
+      <div className="container w-full flex bg-red">
         <div className="w-full flex flex-wrap">
-          <div className="w-full sm:w-3/12">
-            <aside aria-label="Sidebar">
-              <div className="px-3 py-4 overflow-y-auto rounded bg-gray-50">
+          <div className="w-full md:w-3/12">
+            <aside aria-label="Sidebar" className="px-5">
+              <div className="px-3 py-4 overflow-y-auto rounded bg-gray-50 shadow-2xl">
                 <ul className="space-y-2">
                   <li>
                     <h2 className="p-2 text-lg font-bold">Providers</h2>

@@ -1,5 +1,5 @@
 
-import { ethers, BigNumber } from "ethers";
+import { ethers } from "ethers";
 
 const provider = new ethers.providers.Web3Provider(window.ethereum);
 const dexaddress = "0x0355eE85Be5eD60331a36Ee096e829f500FC57c9";
@@ -45,7 +45,7 @@ export const increaseAllowance = async (_tokensSold ,) => {
   
   export const getAmountOfTokens = async (inputAmount) => { 
 
-    if(inputAmount==0){
+    if(inputAmount===0){
       return 0;
     }
     inputAmount = inputAmount*100

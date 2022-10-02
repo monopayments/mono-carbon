@@ -5,63 +5,53 @@ import SvgIcon from '../components/SvgIcon';
 const NftCard = ({ id, price }) => {
   const [nftData, setNftData] = useState({});
 
-  const fetchNftData = async () => {
-    try {
-        const response = await fetch(`https://api.nft.storage/${id}`);
-        const data = response.json();
-        setNftData(data);
-        console.log('data');
-    } catch (error) {
-        console.log('error');
-    }
-  }
+  const fetchNftData = async (id) => {
+    setNftData({
+      id: id,
+      name: 'Certificate #' + id,
+      cert_id: id * 52,
+      image: '/nft.jpeg',
+    });
+  };
 
   useEffect(() => {
     fetchNftData(id);
   });
 
   return (
-    <div className="flex w-full items-center justify-center">
-      <div className="w-full bg-[#1c1c1c] text-gray-50 overflow-hidden rounded-md max-w-sm p-2 flex flex-col">
-        <div className="flex items-center justify-between p-5">
-          <h3 className="text-left text-xl">{nftData.name}</h3>
-          <div className="pl-4">
-            <p>by {nftData.provider}</p>
-          </div>
+    <div className="flex w-full items-center justify-center shadow-2xl">
+      <div className="w-full text-gray-50 overflow-hidden rounded-md max-w-sm p-2 flex flex-col">
+        <div className="flex items-center justify-center p-2 text-center border-b border-gray-200">
+          <h3 className="text-left text-lg text-black font-semibold text-center">
+            {nftData.name}
+          </h3>
         </div>
 
-        <div className="flex items-center justify-center bg-[#2a2a2a] min-h-[250px]">
-          <a
-            className="flex items-center justify-center"
-            href="/#"
-            target="_blank"
-            rel="noreferrer noopener"
+        <div className="flex items-center justify-center border-b border-gray-200">
+          <Link
+            to={`/detail/${id}`}
+            className="flex items-center justify-center p-3"
           >
-            <img
-              src={nftData.image}
-              alt={nftData.name}
-              className="w-1/2 object-cover"
-            />
-          </a>
+            <img src={nftData.image} alt={nftData.name} />
+          </Link>
         </div>
         <div className="flex justify-between p-5">
           <div className="w-full flex items-center justify-center text-white font-bold">
             <span className="mr-auto">Price: {price}</span>
             <div className="flex items-center justify-center">
-              <span className="text-lg mr-3"> {nftData.price}</span>
+              <span className="text-lg mr-3 text-black"> {nftData.price}</span>
               <div className="flex items-center justify-center bg-white rounded-full w-8 h-8">
                 <SvgIcon icon="CARBON" className="w-5 h-5" />
               </div>
-                
             </div>
           </div>
         </div>
-        <div className="w-full bg-[#2a2a2a]">
+        <div className="w-full">
           <Link
             to={`/detail/${id}`}
             className="w-full flex justify-center items-center rounded bg-[#2a2a2a] p-4 hover:bg-[#F9FAFB] hover:text-black"
           >
-            Buy Now
+            Retire
           </Link>
         </div>
       </div>

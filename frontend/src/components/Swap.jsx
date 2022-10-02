@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react';
 import SvgIcon from '../components/SvgIcon';
-import {cryptoDevTokenToEth,increaseAllowance,getAmountOfTokens,ethToCryptoDevToken} from "../utils/web3/swap";
+import {
+  cryptoDevTokenToEth,
+  increaseAllowance,
+  getAmountOfTokens,
+} from '../utils/web3/swap';
 const tokens = {
   CARBON: {
     symbol: 'CARBON',
@@ -19,8 +23,6 @@ const Swap = () => {
   const [amount, setAmount] = useState(0);
   const [amountOfTokens, setmountOfTokens] = useState(0);
 
-  
-
   useEffect(() => {
     if (direction === 1) {
       setSwap([toToken, fromToken]);
@@ -29,45 +31,34 @@ const Swap = () => {
     }
 
     getAmountOfToken(amount);
-    
-  }, [direction, toToken, fromToken,amount]);
+  }, [direction, toToken, fromToken, amount]);
 
-  async  function getAmountOfToken  (){
-    
-    if(amount !=0){
-
+  async function getAmountOfToken() {
+    if (amount !== 0) {
       let temptoken = await getAmountOfTokens(amount);
       setmountOfTokens(temptoken);
     }
+  }
+
+  async function swapCall() {
+    if (swap[0].symbol === 'CARBON') {
+      //await increaseAllowance(amount);
+      await cryptoDevTokenToEth(amount, 1);
+    } else {
     }
-
-  
-  async  function swapCall  (){
-    
-  console.log(swap,"swapCall geldi");
-  if(swap[0].symbol === "CARBON"){
-    console.log("carbon", amount);
-    //await increaseAllowance(amount);
-    await cryptoDevTokenToEth(amount,1);
-   
+    return false;
   }
-  else{
-    console.log("avax geldi", amount);
-    await ethToCryptoDevToken(amount);
-
-  }
-  return false;
-
-}
   return (
-    <form className="p-5" >
+    <form className="p-5">
       <div className="relative mb-5">
         <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
           <SvgIcon icon={swap[0].symbol} className="w-5 h-5" />
         </div>
         <input
           type="text"
-          onChange={(event) => {setAmount(event.target.value)}}
+          onChange={(event) => {
+            setAmount(event.target.value);
+          }}
           className="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="0.0"
           required
@@ -106,7 +97,7 @@ const Swap = () => {
           type="button"
           className="px-4 py-3 text-white bg-gray-700 rounded-lg border border-gray-600"
           onClick={swapCall}
-         >
+        >
           Swap
         </button>
       </div>
