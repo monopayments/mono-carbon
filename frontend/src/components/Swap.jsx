@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import SvgIcon from '../components/SvgIcon';
-import {cryptoDevTokenToEth,increaseAllowance,getAmountOfTokens} from "../utils/web3/swap";
+import {cryptoDevTokenToEth,increaseAllowance,getAmountOfTokens,ethToCryptoDevToken} from "../utils/web3/swap";
 const tokens = {
   CARBON: {
     symbol: 'CARBON',
@@ -53,6 +53,8 @@ const Swap = () => {
   }
   else{
     console.log("avax geldi", amount);
+    await ethToCryptoDevToken(amount);
+
   }
   return false;
 

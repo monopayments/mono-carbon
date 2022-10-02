@@ -16,11 +16,9 @@ const cryptoDevTokenToEthabi = [
   export const cryptoDevTokenToEth = async (_tokensSold ,_minEth) => {
 	const contract = new ethers.Contract(dexaddress, cryptoDevTokenToEthabi, signer);   
 
-    let num = ethers.utils.parseEther('0.01');
-    console.log(num.toString(10));
-    // 10000000000000000 , 1 
-	const tx = await contract.functions.cryptoDevTokenToEth( num.toString(10),1,{gasPrice: 1000000000, gasLimit: 100000});
+    let num = ethers.utils.parseEther(_tokensSold.toString());
 
+	const tx = await contract.functions.cryptoDevTokenToEth(num,1);
 	const receipt = await tx.wait();
 	console.log("receipt", receipt);
 }
@@ -56,8 +54,6 @@ export const increaseAllowance = async (_tokensSold ,) => {
     }
 let inputReserve =   52
 let outputReserve = inputReserve-inputAmount;
-
-
     const contract = new ethers.Contract(dexaddress, getAmountOfTokensabi, provider);   
     let result = await contract.functions.getAmountOfTokens(inputAmount,inputReserve,outputReserve);
     result = Number(result);
@@ -66,3 +62,16 @@ let outputReserve = inputReserve-inputAmount;
 
     return result/100;
   }
+
+const ethToCryptoDevTokenabi = [
+  "function ethToCryptoDevToken(uint256 _minTokens) payable"
+];
+
+export const ethToCryptoDevToken = async (_avaxAmount ,) => { 
+
+  const options = {value: ethers.utils.parseEther(_avaxAmount.toString())}
+	const contract = new ethers.Contract(dexaddress, ethToCryptoDevTokenabi, signer);   
+	const tx = await contract.functions.ethToCryptoDevToken(1,options);
+  const receipt = await tx.wait();
+	console.log("receipt", receipt);
+}
