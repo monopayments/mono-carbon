@@ -20,7 +20,7 @@ const NftCard = ({ id, price }) => {
 
   return (
     <div className="flex w-full items-center justify-center shadow-2xl">
-      <div className="w-full text-gray-50 overflow-hidden rounded-md max-w-sm p-2 flex flex-col">
+      <div className="w-full  overflow-hidden rounded-md max-w-sm p-2 flex flex-col">
         <div className="flex items-center justify-center p-2 text-center border-b border-gray-200">
           <h3 className="text-left text-lg text-black font-semibold text-center">
             {nftData.name}
@@ -36,17 +36,17 @@ const NftCard = ({ id, price }) => {
           </Link>
         </div>
         <div className="flex justify-between p-5">
-          <div className="w-full flex items-center justify-center text-white font-bold">
+          <div className="w-full flex items-center justify-center  font-bold">
             <span className="mr-auto">Price: {price}</span>
             <div className="flex items-center justify-center">
               <span className="text-lg mr-3 text-black"> {nftData.price}</span>
-              <div className="flex items-center justify-center bg-white rounded-full w-8 h-8">
+              <div className="flex items-center justify-center rounded-full w-8 h-8">
                 <SvgIcon icon="CARBON" className="w-5 h-5" />
               </div>
             </div>
           </div>
         </div>
-        <div className="w-full">
+        <div className="w-full text-gray-50">
           <Link
             to={`/detail/${id}`}
             className="w-full flex justify-center items-center rounded bg-[#2a2a2a] p-4 hover:bg-[#F9FAFB] hover:text-black"
