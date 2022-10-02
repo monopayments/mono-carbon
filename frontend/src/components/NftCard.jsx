@@ -37,13 +37,14 @@ const NftCard = ({ id, price }) => {
         </div>
         <div className="flex justify-between p-5">
           <div className="w-full flex items-center justify-center  font-bold">
-            <span className="mr-auto">Price: {price}</span>
+            <span className="mr-auto">Price:</span>
             <div className="flex items-center justify-center">
               <span className="text-lg mr-3 text-black"> {nftData.price}</span>
               <div className="flex items-center justify-center rounded-full w-8 h-8">
                 <SvgIcon icon="CARBON" className="w-5 h-5" />
               </div>
             </div>
+            <span>{price}</span>
           </div>
         </div>
         <div className="w-full text-gray-50">
