@@ -4,6 +4,7 @@ import {
   cryptoDevTokenToEth,
   increaseAllowance,
   getAmountOfTokens,
+  balanceOf
 } from '../utils/web3/swap';
 const tokens = {
   CARBON: {
@@ -22,8 +23,15 @@ const Swap = () => {
   const [swap, setSwap] = useState([fromToken, toToken]);
   const [amount, setAmount] = useState(0);
   const [amountOfTokens, setmountOfTokens] = useState(0);
+  const [balanceText, setbBalanceText] = useState("wqrqew");
+  
 
   useEffect(() => {
+   try {
+    getbalanceOf();
+   } catch (error) {
+    
+   }
     if (direction === 1) {
       setSwap([toToken, fromToken]);
     } else {
@@ -32,6 +40,11 @@ const Swap = () => {
 
     getAmountOfToken(amount);
   }, [direction, toToken, fromToken, amount]);
+
+  async function getbalanceOf(){
+    let tempBalance = await balanceOf();
+    setbBalanceText("Your MonoCarbon Balance is:"+ tempBalance);
+  }
 
   async function getAmountOfToken() {
     if (amount !== 0) {
@@ -50,6 +63,7 @@ const Swap = () => {
   }
   return (
     <form className="p-5">
+      <span className='pb-3 block text-sm font-semibold'>{balanceText}</span>
       <div className="relative mb-5">
         <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
           <SvgIcon icon={swap[0].symbol} className="w-5 h-5" />

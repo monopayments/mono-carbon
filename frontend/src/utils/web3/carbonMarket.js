@@ -31,18 +31,19 @@ export const getNftList = async() => {
     return result;
 }
 
-const retireAbi = [
+
+const retireNftabi = [
     "function retireNft(uint256 nftId) payable"
   ];
   
-export const retireNft = async(nftId, value) => {
+  export const retireNft = async(nftId, ) => {
     const signer = provider.getSigner();
-
-    const contract = new ethers.Contract(address, retireAbi, signer);
-
-    const options = {value: ethers.utils.parseEther(value)}
-    const tx = await contract.functions.retireNft(nftId, options);
-
-    const receipt = await tx.wait();
-    console.log("receipt", receipt);
-}
+    const options = {value: ethers.utils.parseEther("0")}
+      const contract = new ethers.Contract(address, retireNftabi, signer);   
+      console.log(nftId);
+      const tx = await contract.functions.retireNft(nftId ,options);
+       
+      const receipt = await tx.wait();
+      console.log("receipt", receipt);
+  }
+  
