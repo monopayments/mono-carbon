@@ -55,7 +55,7 @@ function Marketplace() {
   }, [])
 
   return (
-    <section className="w-full pt-24 md:pt-0 md:h-screen relative flex flex-col justify-center items-center">
+    <section className="w-full pt-24 md:pt-0 md:min-h-screen relative flex flex-col justify-center items-center">
       <div className="container w-full flex items-center justify-center bg-red">
         <div className="w-full flex flex-wrap">
           <div className="w-full sm:w-3/12">

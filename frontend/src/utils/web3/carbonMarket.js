@@ -30,3 +30,19 @@ export const getNftList = async() => {
     console.log("result", result);
     return result;
 }
+
+const retireAbi = [
+    "function retireNft(uint256 nftId) payable"
+  ];
+  
+export const retireNft = async(nftId, value) => {
+    const signer = provider.getSigner();
+
+    const contract = new ethers.Contract(address, retireAbi, signer);
+
+    const options = {value: ethers.utils.parseEther(value)}
+    const tx = await contract.functions.retireNft(nftId, options);
+
+    const receipt = await tx.wait();
+    console.log("receipt", receipt);
+}
