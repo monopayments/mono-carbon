@@ -8,22 +8,7 @@ function Marketplace() {
   const [query] = useSearchParams();
   const [selectedProvider, setSelectedProvider] = useState(query.get('provider') || '');
   const [nftIDs, setNftIDs] = useState([]);
-  const asyncGet =  async () =>{
-    const nfts = await getNftList()
-    const nftsChanged = nfts.map(async (nftID) => {
-      // const price = await tokenToValue(nftID);
-      // console.log('price:', price);
-      return (
-        {
-          id: Number(nftID),
-          provider: 'akb',
-          // price: Number(price)
-        }
-      );
-    })
-    console.log('nfts', nftsChanged)
-    return (nftsChanged.concat(listedNfts));
-  }
+
   const listedNfts = [
     {
       id: 200,
@@ -57,11 +42,26 @@ function Marketplace() {
     }
   ];
 
-  useEffect(() => {
-    asyncGet().then((nfts) => {
-      console.log(nfts)
-      setNftIDs(nfts)
+const asyncGet =  async () =>{
+  const nfts = await getNftList();
+  let modifiedNfts = [];
+  for(let i=0; i<nfts.length; i++){
+    const price = await tokenToValue(nfts[i]);
+    modifiedNfts.push({
+      id: Number(nfts[i]),
+      provider: 'akb',
+      price: Number(price)
     })
+  }
+  return modifiedNfts.concat(listedNfts);
+  // setNftIDs(modifiedNfts.concat(listedNfts));
+}
+
+  useEffect(() => {
+    asyncGet().then((i) =>{
+      setNftIDs(i);
+    });
+
   }, [])
 
   return (
