@@ -1,5 +1,5 @@
 
-import { ethers } from "ethers";
+import { BigNumber, ethers } from "ethers";
 
 const provider = new ethers.providers.Web3Provider(window.ethereum);
 const dexaddress = "0x0355eE85Be5eD60331a36Ee096e829f500FC57c9";
@@ -74,4 +74,21 @@ export const ethToCryptoDevToken = async (_avaxAmount ,) => {
 	const tx = await contract.functions.ethToCryptoDevToken(1,options);
   const receipt = await tx.wait();
 	console.log("receipt", receipt);
+}
+
+const balanceOfabi = [
+  "function balanceOf(address account) view returns (uint256)"
+];
+
+
+export const balanceOf = async () => { 
+
+  const contract = new ethers.Contract(tokenAddress, balanceOfabi, signer);   
+  let tempAdress = await signer.getAddress();
+	let  result = await contract.functions.balanceOf(tempAdress);
+  result = ethers.utils.formatEther(result.toString());
+
+
+	console.log("result", result);
+  return result;
 }
