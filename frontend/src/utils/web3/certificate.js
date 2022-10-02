@@ -30,3 +30,17 @@ export const approval = async (_address) => {
     const receipt = await tx.wait();
 	console.log("receipt", receipt);
 }
+
+const valueAbi = [
+    "function tokenToValue(uint256) view returns (uint256)"
+];
+  
+export const tokenToValue = async (_id) => {
+    const signer = provider.getSigner();
+
+    const contract = new ethers.Contract(address, valueAbi, signer);   
+    const result = await contract.functions.tokenToValue(BigNumber.from(_id));
+
+    console.log("result", result);
+    return result
+}

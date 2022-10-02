@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import SvgIcon from '../components/SvgIcon';
 
-const NftCard = ({ id }) => {
+const NftCard = ({ id, price }) => {
   const [nftData, setNftData] = useState({});
 
   const fetchNftData = async () => {
@@ -46,7 +46,7 @@ const NftCard = ({ id }) => {
         </div>
         <div className="flex justify-between p-5">
           <div className="w-full flex items-center justify-center text-white font-bold">
-            <span className="mr-auto">Price: </span>
+            <span className="mr-auto">Price: {price}</span>
             <div className="flex items-center justify-center">
               <span className="text-lg mr-3"> {nftData.price}</span>
               <div className="flex items-center justify-center bg-white rounded-full w-8 h-8">

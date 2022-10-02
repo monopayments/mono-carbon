@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import NftCard from '../components/NftCard';
 import { getNftList } from '../utils/web3/carbonMarket';
+import { tokenToValue } from '../utils/web3/certificate';
 
 function Marketplace() {
   const [query] = useSearchParams();
@@ -12,14 +13,17 @@ function Marketplace() {
     {
       id: 200,
       provider: 'bis',
+      price: 1200,
     },
     {
       id: 201,
       provider: 'gns',
+      price: 1400,
     },
     {
       id: 202,
       provider: 'gns',
+      price: 2000,
     },
   ];
 
@@ -41,14 +45,17 @@ function Marketplace() {
   useEffect(() => {
     const asyncGet =  async () =>{
       let nfts = await getNftList()
-      nfts = nfts.map((nftID) => {
+      nfts = nfts.map(async (nftID) => {
+        const price = await tokenToValue(nftID);
         return(
           {
             id: Number(nftID),
             provider: 'akb',
+            price: Number(price)
           }
         )
       })
+      console.log(nfts)
       setNftIDs(nfts.concat(listedNfts));
     }
     asyncGet();
@@ -102,7 +109,7 @@ function Marketplace() {
                   return selectedProvider === '' ? 'all' : nft.provider === selectedProvider;
                 })
                 .map((listedNft) => {
-                  return <NftCard id={listedNft.id} key={listedNft.id} />;
+                  return <NftCard id={listedNft.id} price={listedNft.price} key={listedNft.id} />;
                 })}
             </div>
           </div>
