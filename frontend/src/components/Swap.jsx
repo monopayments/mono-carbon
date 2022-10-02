@@ -24,7 +24,7 @@ const Swap = () => {
   const [swap, setSwap] = useState([fromToken, toToken]);
   const [amount, setAmount] = useState(0);
   const [amountOfTokens, setmountOfTokens] = useState(0);
-  const [balanceText, setbBalanceText] = useState("wqrqew");
+  const [balanceText, setbBalanceText] = useState("mc4");
   
 
   useEffect(() => {
