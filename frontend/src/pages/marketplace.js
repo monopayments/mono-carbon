@@ -26,7 +26,7 @@ function Marketplace() {
   const providers = [
     {
       id: 'bis',
-      name: 'Bisiklet Kira Şirketi',
+      name: 'Bisiklet Kiralama Şirketi',
     },
     {
       id: 'gns',
