@@ -4,7 +4,8 @@ import {
   cryptoDevTokenToEth,
   increaseAllowance,
   getAmountOfTokens,
-  balanceOf
+  balanceOf,
+  ethToCryptoDevToken
 } from '../utils/web3/swap';
 const tokens = {
   CARBON: {
@@ -58,6 +59,7 @@ const Swap = () => {
       //await increaseAllowance(amount);
       await cryptoDevTokenToEth(amount, 1);
     } else {
+      await ethToCryptoDevToken(amount);
     }
     return false;
   }
