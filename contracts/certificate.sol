@@ -22,7 +22,7 @@ contract Certificate is ERC1155, ERC1155Burnable{
     Counters.Counter public _tokenIds;
 
     event Whitelisted(address indexed account, bool isWhitelisted);
-
+    event Mint(address owner, uint256 carbon, uint256 cerfId);
     modifier onlyOwner(){
         require(msg.sender == owner, "Only owner.");
         _;
@@ -60,6 +60,7 @@ contract Certificate is ERC1155, ERC1155Burnable{
         cerfIdList[newItemId] = _cerfId;
 
         _tokenIds.increment();
+        emit Mint(msg.sender, carbon, _cerfId);
     }
 
     function retireCertificate(uint _id) 

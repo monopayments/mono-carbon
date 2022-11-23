@@ -23,30 +23,32 @@ contract  CarbonMarket is ERC1155Holder {
     MonoCarbon public token;
     mapping (uint256 => address) public retireList;
 
+    event Fractionize(address fractionizer, uint256 nftId);
+    event Retire(address retirer, uint256 nftId);
+
     constructor(address _certificateCont,address _MonoCarbonToken) {
-       
         certificate = Certificate(_certificateCont);
         token = MonoCarbon(_MonoCarbonToken);
-         }
+    }
 
-      function getNftList() public view returns(uint256[] memory) {
-
+    function getNftList() public view returns(uint256[] memory) {
         return  nftList;
-      }   
+    }   
 
-        function removeItem(uint256 nftId) internal {
-        for (uint i = 0; i<nftList.length; i++){
-            if(nftList[i] == nftId){
-                delete nftList[i];
-             }
+    function removeItem(uint256 nftId) internal {
+    for (uint i = 0; i<nftList.length; i++){
+        if(nftList[i] == nftId){
+            delete nftList[i];
             }
         }
+    }
    
-    function fractionizeNft(uint256 nftId,uint256 amount) external {
-      require(nftId >= 0, "Token doesnot exist");
-      certificate.safeTransferFrom(msg.sender, address(this), nftId, 1, "");
-      token.mint(msg.sender, certificate.tokenToValue(nftId));
-      nftList.push(nftId);
+    function fractionizeNft(uint256 nftId) external {
+        require(nftId >= 0, "Token doesnot exist");
+        certificate.safeTransferFrom(msg.sender, address(this), nftId, 1, "");
+        token.mint(msg.sender, certificate.tokenToValue(nftId));
+        nftList.push(nftId);
+        emit Fractionize(msg.sender, nftId);
     }
 
  
@@ -57,7 +59,7 @@ contract  CarbonMarket is ERC1155Holder {
         certificate.retireCertificate(nftId);
         retireList[nftId] = msg.sender;        
         removeItem(nftId);
-
+        emit Retire(msg.sender, nftId);
     }
 
 }
