@@ -1,4 +1,5 @@
-pragma solidity =0.5.16;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.4;
 
 import './interfaces/IUniswapV2Factory.sol';
 import './UniswapV2Pair.sol';
@@ -6,35 +7,38 @@ import './UniswapV2Pair.sol';
 contract UniswapV2Factory is IUniswapV2Factory {
     address public feeTo;
     address public feeToSetter;
+    address public monocarbon;
 
     mapping(address => mapping(address => address)) public getPair;
     address[] public allPairs;
 
     event PairCreated(address indexed token0, address indexed token1, address pair, uint);
 
-    constructor(address _feeToSetter) public {
-        feeToSetter = _feeToSetter;
+    constructor(address _monocarbon) public {
+        feeToSetter = msg.sender;
+        monocarbon = _monocarbon;
     }
 
     function allPairsLength() external view returns (uint) {
         return allPairs.length;
     }
 
-    function createPair(address tokenA, address tokenB) external returns (address pair) {
-        require(tokenA != tokenB, 'UniswapV2: IDENTICAL_ADDRESSES');
-        (address token0, address token1) = tokenA < tokenB ? (tokenA, tokenB) : (tokenB, tokenA);
-        require(token0 != address(0), 'UniswapV2: ZERO_ADDRESS');
-        require(getPair[token0][token1] == address(0), 'UniswapV2: PAIR_EXISTS'); // single check is sufficient
+    function createPair(address tokenA) external returns (address pair) {
+        require(feeToSetter == msg.sender, 'Only the owner can add pairs.');
+        require(tokenA != monocarbon, 'UniswapV2: IDENTICAL_ADDRESSES');
+        // (address token0, address token1) = tokenA < monocarbon ? (tokenA, monocarbon) : (monocarbon, tokenA);
+        require(tokenA != address(0), 'UniswapV2: ZERO_ADDRESS');
+        require(getPair[monocarbon][tokenA] == address(0), 'UniswapV2: PAIR_EXISTS'); // single check is sufficient
         bytes memory bytecode = type(UniswapV2Pair).creationCode;
-        bytes32 salt = keccak256(abi.encodePacked(token0, token1));
+        bytes32 salt = keccak256(abi.encodePacked(monocarbon, tokenA));
         assembly {
             pair := create2(0, add(bytecode, 32), mload(bytecode), salt)
         }
-        IUniswapV2Pair(pair).initialize(token0, token1);
-        getPair[token0][token1] = pair;
-        getPair[token1][token0] = pair; // populate mapping in the reverse direction
+        IUniswapV2Pair(pair).initialize(monocarbon, tokenA);
+        getPair[monocarbon][tokenA] = pair;
+        getPair[tokenA][monocarbon] = pair; // populate mapping in the reverse direction
         allPairs.push(pair);
-        emit PairCreated(token0, token1, pair, allPairs.length);
+        emit PairCreated(monocarbon, tokenA, pair, allPairs.length);
     }
 
     function setFeeTo(address _feeTo) external {
