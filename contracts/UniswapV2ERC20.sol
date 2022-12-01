@@ -8,7 +8,7 @@ contract UniswapV2ERC20 is IUniswapV2ERC20 {
     using SafeMath for uint;
 
     string public constant name = "MonoCarbon LP Token";
-    string public constant symbol = "MCLP";
+    string public constant symbol = "MC4LP";
     uint8 public constant decimals = 18;
     uint  public totalSupply;
     mapping(address => uint) public balanceOf;

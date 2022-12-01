@@ -1,20 +1,19 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-import './interfaces/IUniswapV2Factory.sol';
 import './UniswapV2Pair.sol';
+import './interfaces/IUniswapV2Pair.sol';
 
-contract UniswapV2Factory is IUniswapV2Factory {
+contract UniswapV2Factory {
     address public feeTo;
     address public feeToSetter;
     address public monocarbon;
 
     mapping(address => mapping(address => address)) public getPair;
     address[] public allPairs;
-
     event PairCreated(address indexed token0, address indexed token1, address pair, uint);
 
-    constructor(address _monocarbon) public {
+    constructor(address _monocarbon) {
         feeToSetter = msg.sender;
         monocarbon = _monocarbon;
     }
