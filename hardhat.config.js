@@ -10,5 +10,10 @@ module.exports = {
       url: `https://api.avax-test.network/ext/bc/C/rpc`,
       accounts: [process.env.PRIVATE_KEY]
     }
+  },
+  etherscan: {
+    apiKey: {
+      avalancheFujiTestnet: process.env.SNOWTRACE_API_KEY
+    }
   }
 };
