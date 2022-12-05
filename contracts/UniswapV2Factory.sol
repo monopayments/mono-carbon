@@ -4,30 +4,32 @@ pragma solidity ^0.8.4;
 import './UniswapV2Pair.sol';
 import './interfaces/IUniswapV2Pair.sol';
 
-contract UniswapV2Factory {
-    address public feeTo;
-    address public feeToSetter;
+contract UniswapV2Factory is IUniswapV2Factory {
+    address public override feeTo;
+    address public override feeToSetter;
     address public monocarbon;
 
-    mapping(address => mapping(address => address)) public getPair;
-    address[] public allPairs;
-    event PairCreated(address indexed token0, address indexed token1, address pair, uint);
+    mapping(address => mapping(address => address)) public override getPair;
+    address[] public override allPairs;
 
     constructor(address _monocarbon) {
         feeToSetter = msg.sender;
         monocarbon = _monocarbon;
     }
 
-    function allPairsLength() external view returns (uint) {
+    function allPairsLength() external view override returns (uint) {
         return allPairs.length;
     }
 
     function createPair(address tokenA) external returns (address pair) {
-        require(feeToSetter == msg.sender, 'Only the owner can add pairs.');
-        require(tokenA != monocarbon, 'UniswapV2: IDENTICAL_ADDRESSES');
+        require(feeToSetter == msg.sender, "Only the owner can add pairs.");
+        require(tokenA != monocarbon, "UniswapV2: IDENTICAL_ADDRESSES");
         // (address token0, address token1) = tokenA < monocarbon ? (tokenA, monocarbon) : (monocarbon, tokenA);
-        require(tokenA != address(0), 'UniswapV2: ZERO_ADDRESS');
-        require(getPair[monocarbon][tokenA] == address(0), 'UniswapV2: PAIR_EXISTS'); // single check is sufficient
+        require(tokenA != address(0), "UniswapV2: ZERO_ADDRESS");
+        require(
+            getPair[monocarbon][tokenA] == address(0),
+            "UniswapV2: PAIR_EXISTS"
+        ); // single check is sufficient
         bytes memory bytecode = type(UniswapV2Pair).creationCode;
         bytes32 salt = keccak256(abi.encodePacked(monocarbon, tokenA));
         assembly {
@@ -40,13 +42,18 @@ contract UniswapV2Factory {
         emit PairCreated(monocarbon, tokenA, pair, allPairs.length);
     }
 
-    function setFeeTo(address _feeTo) external {
-        require(msg.sender == feeToSetter, 'UniswapV2: FORBIDDEN');
+    function setFeeTo(address _feeTo) external override {
+        require(msg.sender == feeToSetter, "UniswapV2: FORBIDDEN");
         feeTo = _feeTo;
     }
 
-    function setFeeToSetter(address _feeToSetter) external {
-        require(msg.sender == feeToSetter, 'UniswapV2: FORBIDDEN');
+    function setFeeToSetter(address _feeToSetter) external override {
+        require(msg.sender == feeToSetter, "UniswapV2: FORBIDDEN");
         feeToSetter = _feeToSetter;
     }
+
+    function createPair(
+        address tokenA,
+        address tokenB
+    ) external override returns (address pair) {}
 }

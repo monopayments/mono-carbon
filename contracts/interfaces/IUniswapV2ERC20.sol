@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.4;
 
 interface IUniswapV2ERC20 {
     event Approval(address indexed owner, address indexed spender, uint value);

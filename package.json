@@ -9,6 +9,7 @@
     "hardhat": "^2.11.2"
   },
   "dependencies": {
+    "@uniswap/lib": "^4.0.1-alpha",
     "dotenv": "^16.0.3"
   }
 }
