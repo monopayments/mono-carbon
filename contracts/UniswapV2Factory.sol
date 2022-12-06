@@ -51,9 +51,4 @@ contract UniswapV2Factory is IUniswapV2Factory {
         require(msg.sender == feeToSetter, "UniswapV2: FORBIDDEN");
         feeToSetter = _feeToSetter;
     }
-
-    function createPair(
-        address tokenA,
-        address tokenB
-    ) external override returns (address pair) {}
 }

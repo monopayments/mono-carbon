@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.5.0;
+import "./IUniswapV2ERC20.sol";
 
-interface IUniswapV2Pair {
+interface IUniswapV2Pair is IUniswapV2ERC20 {
     // event Approval(address indexed owner, address indexed spender, uint value);
     // event Transfer(address indexed from, address indexed to, uint value);
     event Mint(address indexed sender, uint amount0, uint amount1);
