@@ -21,7 +21,7 @@ contract UniswapV2Factory is IUniswapV2Factory {
         return allPairs.length;
     }
 
-    function createPair(address tokenA) external returns (address pair) {
+    function createPair(address tokenA) external override returns (address pair) {
         require(feeToSetter == msg.sender, "Only the owner can add pairs.");
         require(tokenA != monocarbon, "UniswapV2: IDENTICAL_ADDRESSES");
         // (address token0, address token1) = tokenA < monocarbon ? (tokenA, monocarbon) : (monocarbon, tokenA);
