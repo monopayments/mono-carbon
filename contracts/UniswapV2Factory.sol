@@ -1,30 +1,30 @@
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity =0.5.16;
 
+import './interfaces/IUniswapV2Factory.sol';
 import './UniswapV2Pair.sol';
-import './interfaces/IUniswapV2Pair.sol';
 
 contract UniswapV2Factory is IUniswapV2Factory {
-    address public override feeTo;
-    address public override feeToSetter;
+    address public feeTo;
+    address public feeToSetter;
     address public monocarbon;
 
-    mapping(address => mapping(address => address)) public override getPair;
-    address[] public override allPairs;
+    mapping(address => mapping(address => address)) public getPair;
+    address[] public allPairs;
 
-    constructor(address _monocarbon) {
-        feeToSetter = msg.sender;
+    event PairCreated(address indexed token0, address indexed token1, address pair, uint);
+
+    constructor(address _monocarbon) public {
         monocarbon = _monocarbon;
+        feeToSetter = msg.sender;
     }
 
-    function allPairsLength() external view override returns (uint) {
+    function allPairsLength() external view returns (uint) {
         return allPairs.length;
     }
 
-    function createPair(address tokenA) external override returns (address pair) {
+    function createPair(address tokenA) external returns (address pair) {
         require(feeToSetter == msg.sender, "Only the owner can add pairs.");
-        require(tokenA != monocarbon, "UniswapV2: IDENTICAL_ADDRESSES");
-        // (address token0, address token1) = tokenA < monocarbon ? (tokenA, monocarbon) : (monocarbon, tokenA);
+        require(tokenA != monocarbon, 'UniswapV2: IDENTICAL_ADDRESSES');
         require(tokenA != address(0), "UniswapV2: ZERO_ADDRESS");
         require(
             getPair[monocarbon][tokenA] == address(0),
@@ -42,13 +42,13 @@ contract UniswapV2Factory is IUniswapV2Factory {
         emit PairCreated(monocarbon, tokenA, pair, allPairs.length);
     }
 
-    function setFeeTo(address _feeTo) external override {
-        require(msg.sender == feeToSetter, "UniswapV2: FORBIDDEN");
+    function setFeeTo(address _feeTo) external {
+        require(msg.sender == feeToSetter, 'UniswapV2: FORBIDDEN');
         feeTo = _feeTo;
     }
 
-    function setFeeToSetter(address _feeToSetter) external override {
-        require(msg.sender == feeToSetter, "UniswapV2: FORBIDDEN");
+    function setFeeToSetter(address _feeToSetter) external {
+        require(msg.sender == feeToSetter, 'UniswapV2: FORBIDDEN');
         feeToSetter = _feeToSetter;
     }
 }

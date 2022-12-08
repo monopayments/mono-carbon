@@ -5,7 +5,29 @@ require('dotenv').config()
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
   solidity: {
-    version: "0.8.17",
+    compilers: [
+      {
+        version: "0.8.17",
+      },
+      {
+        version: "0.5.16",
+      },
+      {
+        version: "0.5.0",
+      },
+      {
+        version: "0.6.6",
+      },
+    ],
+    overrides: {
+      "contracts/libraries/UniswapV2Library.sol": {
+        version: "0.5.0",
+      },
+      "contracts/UniswapV2Factory.sol": {
+        version: "0.5.16",
+        settings: { }
+      }
+    },
     settings: {
       optimizer: {
         enabled: true,
