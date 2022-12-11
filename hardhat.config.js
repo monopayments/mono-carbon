@@ -17,6 +17,28 @@ module.exports = {
       },
       {
         version: "0.6.6",
+        settings: {          // See the solidity docs for advice about optimization and evmVersion
+          optimizer: {
+            enabled: true,
+            runs: 999999
+          },
+          evmVersion: "istanbul", 
+          outputSelection: {
+           "*": {
+             "": [
+               "ast"
+             ],
+             "*": [
+               "evm.bytecode.object",
+               "evm.deployedBytecode.object",
+               "abi",
+               "evm.bytecode.sourceMap",
+               "evm.deployedBytecode.sourceMap",
+               "metadata"
+             ]
+           },
+         }
+         }
       },
     ],
     overrides: {
@@ -27,12 +49,6 @@ module.exports = {
         version: "0.5.16",
         settings: { }
       }
-    },
-    settings: {
-      optimizer: {
-        enabled: true,
-        runs: 1000,
-      },
     },
   },
   networks: {
