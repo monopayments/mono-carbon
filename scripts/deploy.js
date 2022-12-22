@@ -29,7 +29,7 @@ async function main() {
 
   console.log("UniswapV2Factory contract: " + uniswapV2Factory.address);
 
-  // uniswapV2Factory.createPair('0x82DCEC6aa3c8BFE2C96d40d8805EE0dA15708643');
+  uniswapV2Factory.createPair('0xBAC9223E8329943aC8db2BE6606DCA8bc4345C82');
 
   const UniswapV2Router = await ethers.getContractFactory("UniswapV2Router02");
   const uniswapV2Router = await UniswapV2Router.deploy(uniswapV2Factory.address, "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7");

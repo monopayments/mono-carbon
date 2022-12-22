@@ -17,9 +17,9 @@ npx hardhat run scripts/deploy.js
 
 ## Latest Addresses of Contracts 
 ```
-MonoCarbon contract: 0x1BCFc6D371fD0BA1DeB2D8E1560ED2f1962be396
-Certificate contract: 0x5B9E41A58f1372c5Ae2bdFD82329C1D23Eee03cA
-CarbonMarket contract: 0x67dEd794aC8d07696db27eC3dAdbf02723B88456
-UniswapV2Factory contract: 0xa70b4Bd26ae34e2ff613bCEc2487821A345F16d4
-UniswapV2Router contract: 0xA083F8a2d17170a3a78291F9d67E3af34cAda8dD
+MonoCarbon contract: 0xcCEBDa25391ADB7bC1F66525D57De748F5D7942D
+Certificate contract: 0xBAb2F1F4981e9841c745f9efd40Cb8B12BCAaA63
+CarbonMarket contract: 0xb8b831cd630492D13BdC00f675aA0E82862Ec667
+UniswapV2Factory contract: 0x19961A0C5c147FA5F7257EAB1318289543D46d8f
+UniswapV2Router contract: 0xDf55b25020357F8E97213806820eB58E7C560f97
 ```
